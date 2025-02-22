@@ -1,2 +1,36 @@
-# write a cloud formation template
-# Test of writing locally and pushing to GitHub via ssh
+## Project 1 - WebScraper
+# From https://youtu.be/51r3zPOun5g?si=MR2AjWEhBgGIDdSw
+#######################################################
+# To create a cloudformation Stack with AWS CLI
+#aws cloudformation create-stack \
+#  --stack-name my-stack \
+#  --template-body file://template.yaml \
+#  --parameters ParameterKey=InstanceType,ParameterValue=t2.micro \
+#  --region us-east-1
+#######################################################
+# AWSTemplateVersion: "2010-09-09"
+#######################################################
+
+####
+# PARAMETERS
+####
+
+####
+# RESOURCES
+####
+
+####
+# EC2
+####
+
+####
+# RDS
+####
+
+####
+# OTHER
+####
+
+####
+# OUTPUTS
+####
