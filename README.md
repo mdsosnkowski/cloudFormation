@@ -1,2 +1,2 @@
 # cloudFormation
-Variou Cloud Fomation templates and projects
+CloudFormation templates and projects
