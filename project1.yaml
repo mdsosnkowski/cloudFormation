@@ -8,29 +8,27 @@
 #  --parameters ParameterKey=InstanceType,ParameterValue=t2.micro \
 #  --region us-east-1
 #######################################################
-# AWSTemplateVersion: "2010-09-09"
+# AWSTemplateFormatVersion: "2010-09-09"
 #######################################################
 
 ####
-# PARAMETERS
-####
+Parmeters:
+  InstanceType:
+    Type: String
+    Default: t2.micro
+    Description: EC2 instance type for all systems
 
 ####
-# RESOURCES
-####
+Resources:
+ MyEC2Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+    InstanceType: !Ref InstanceType
+    ImageID: 
 
 ####
-# EC2
-####
-
-####
-# RDS
-####
-
-####
-# OTHER
-####
-
-####
-# OUTPUTS
-####
+Outputs:
+  InstancePublicIP:
+    Description: Public IP of the EC2 instance
+    value: !GetAtt  MyEC2Instance.PublicIp
+    
