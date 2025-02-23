@@ -8,11 +8,11 @@
 #  --parameters ParameterKey=InstanceType,ParameterValue=t2.micro \
 #  --region us-east-1
 #######################################################
-# AWSTemplateFormatVersion: "2010-09-09"
+AWSTemplateFormatVersion: "2010-09-09"
 #######################################################
 
 ####
-Parmeters:
+Parameters:
   InstanceType:
     Type: String
     Default: t2.micro
@@ -23,12 +23,11 @@ Resources:
  MyEC2Instance:
     Type: AWS::EC2::Instance
     Properties:
-    InstanceType: !Ref InstanceType
-    ImageID: 
+      InstanceType: !Ref InstanceType
+      ImageId: !Sub "{{resolve:ssm:/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2}}"
 
 ####
 Outputs:
   InstancePublicIP:
     Description: Public IP of the EC2 instance
-    value: !GetAtt  MyEC2Instance.PublicIp
-    
+    Value: !GetAtt MyEC2Instance.PublicIp
