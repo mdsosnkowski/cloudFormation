@@ -5,6 +5,7 @@
 #aws cloudformation create-stack \
 #  --stack-name my-stack \
 #  --template-body file://template.yaml \
+#  --template-body file:///mnt/c/Users/Joasia/Documents/Mike Stuff/CloudFormationProjects/cloudFormation/project1.yaml
 #  --parameters ParameterKey=InstanceType,ParameterValue=t2.micro \
 #  --region us-east-1
 #######################################################
@@ -26,8 +27,9 @@ Resources:
       InstanceType: !Ref InstanceType
       ImageId: !Sub "{{resolve:ssm:/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2}}"
 
+
 ####
 Outputs:
   InstancePublicIP:
-    Description: Public IP of the EC2 instance
-    Value: !GetAtt MyEC2Instance.PublicIp
+     Description: Public IP of the EC2 instance
+     Value: !GetAtt MyEC2Instance.PublicIp
