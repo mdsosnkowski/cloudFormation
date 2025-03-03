@@ -1,0 +1,29 @@
+AWSTemplateFormatVersion: "2010-09-09"
+## Project 1 - WebScraper
+# From https://youtu.be/51r3zPOun5g?si=MR2AjWEhBgGIDdSw
+# File name is project1-a.yaml which has EC2
+# aws cloudformation validate-template --template-body file:///mnt/c/Users/Joasia/Documents/MikeStuff/CloudFormationProjects/cloudFormation/project1-a.yaml
+#
+# aws cloudformation create-stack   --stack-name my-stack   --template-body  file:///mnt/c/Users/Joasia/Documents/MikeStuff/CloudFormationProjects/cloudFormation/project1-a.yaml
+#
+# NOTE: do not put the parameters in the cli command as theses are in the config
+# NOTE: try to use a non-hardcodded Instance type
+#######################################################
+####
+Parameters:
+  InstanceType:
+    Type: String
+    Default: t2.micro
+    Description: EC2 instance type for all systems
+####
+Resources:
+ MyEC2Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: !Ref InstanceType
+      ImageId: ami-0c104f6f4a5d9d1d5
+####
+Outputs:
+  InstancePublicIP:
+    Description: Public IP of the EC2 instance
+    Value: !GetAtt MyEC2Instance.PublicIp

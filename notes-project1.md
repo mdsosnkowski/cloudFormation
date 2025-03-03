@@ -1,5 +1,7 @@
 # Project 1 - Web Scraper Notes and Log
-
+For markdown preview: Ctrl-K V
+For promt shorting in CLI: export PS1="\W\$ "
+ 
 ## MARCH 2025
 #### Monday 3
 Create the RDS Datbase backend.

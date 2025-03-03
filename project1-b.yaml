@@ -1,5 +1,8 @@
 AWSTemplateFormatVersion: "2010-09-09"
-# aws cloudformation validate-template --template-body file:///mnt/c/Users/Joasia/Documents/MikeStuff/CloudFormationProjects/cloudFormation/project1-a.yaml
+## Project 1 - WebScraper
+# From https://youtu.be/51r3zPOun5g?si=MR2AjWEhBgGIDdSw
+# File name is project1-b.yaml which has RDS installed.
+# aws cloudformation validate-template --template-body file:///mnt/c/Users/Joasia/Documents/MikeStuff/CloudFormationProjects/cloudFormation/project1-b.yaml
 #
 # aws cloudformation create-stack   --stack-name my-stack   --template-body  file:///mnt/c/Users/Joasia/Documents/MikeStuff/CloudFormationProjects/cloudFormation/project1-a.yaml
 #
