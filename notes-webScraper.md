@@ -1,8 +1,11 @@
-# Project 1 - Web Scraper Notes and Log
+# Web Scraper Notes and Log
 For markdown preview: Ctrl-K V
 For promt shorting in CLI: export PS1="\W\$ "
  
 ## MARCH 2025
+
+#### Tuesday 4
+Changed all names to reflect the name of the project "webScraper" with a list of the resources being provisioned of each step. As well adding in assertions to check if the code is correct.
 #### Monday 3
 Create the RDS Datbase backend.
 
