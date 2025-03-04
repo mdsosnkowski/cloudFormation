@@ -1,27 +1,33 @@
 AWSTemplateFormatVersion: "2010-09-09"
-## Project 1 - WebScraper
+## Project 1 - WebScraper_EC2
 # From https://youtu.be/51r3zPOun5g?si=MR2AjWEhBgGIDdSw
-# File name is project1-a.yaml which has EC2
-# aws cloudformation validate-template --template-body file:///mnt/c/Users/Joasia/Documents/MikeStuff/CloudFormationProjects/cloudFormation/project1-a.yaml
-#
-# aws cloudformation create-stack   --stack-name my-stack   --template-body  file:///mnt/c/Users/Joasia/Documents/MikeStuff/CloudFormationProjects/cloudFormation/project1-a.yaml
-#
+# File name is project1-b.yaml which has RDS installed.
+# Validate stack template:
+# aws cloudformation validate-template --template-body file:///mnt/c/Users/Joasia/Documents/MikeStuff/CloudFormationProjects/cloudFormation/project1-b.yaml
+# Deploy stack
+# aws cloudformation create-stack   --stack-name my-stack   --template-body  file:///mnt/c/Users/Joasia/Documents/MikeStuff/CloudFormationProjects/cloudFormation/project1-b.yaml
+# Delete stack
+# aws cloudformation delete-stack   --stack-name my-stack
 # NOTE: do not put the parameters in the cli command as theses are in the config
 # NOTE: try to use a non-hardcodded Instance type
 #######################################################
 ####
 Parameters:
+# Web scraper server
   InstanceType:
     Type: String
     Default: t2.micro
     Description: EC2 instance type for all systems
 ####
 Resources:
+# Web scraper server
  MyEC2Instance:
     Type: AWS::EC2::Instance
     Properties:
       InstanceType: !Ref InstanceType
       ImageId: ami-0c104f6f4a5d9d1d5
+
+      
 ####
 Outputs:
   InstancePublicIP:
