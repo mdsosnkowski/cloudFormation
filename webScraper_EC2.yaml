@@ -1,4 +1,5 @@
 AWSTemplateFormatVersion: "2010-09-09"
+# TITLE: webScraper_EC2
 ## WebScraper Applicaiton using EC2, S3, RDS, VPC, IAM, and CLOUDWATCH
 # From https://youtu.be/51r3zPOun5g?si=MR2AjWEhBgGIDdSw
 # Validate stack template:
