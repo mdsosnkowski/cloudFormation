@@ -4,9 +4,13 @@ For promt shorting in CLI: export PS1="\W\$ "
  
 ## MARCH 2025
 
-#### Tuesday 4
+#### Wed 5
+Create S3 buscket for holding imaged. File name is webScraper_EC2_S3.yaml
+
+#### Tue 4
 Changed all names to reflect the name of the project "webScraper" with a list of the resources being provisioned of each step. As well adding in assertions to check if the code is correct.
-#### Monday 3
+
+#### Mon 3
 Create the RDS Datbase backend.
 
 

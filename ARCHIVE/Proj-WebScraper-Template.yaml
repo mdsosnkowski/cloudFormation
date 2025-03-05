@@ -12,14 +12,14 @@
 AWSTemplateFormatVersion: "2010-09-09"
 #######################################################
 
-####
+#
 Parameters:
   InstanceType:
     Type: String
     Default: t2.micro
     Description: EC2 instance type for all systems
 
-####
+#
 Resources:
  MyEC2Instance:
     Type: AWS::EC2::Instance
@@ -28,7 +28,7 @@ Resources:
       ImageId: !Sub "{{resolve:ssm:/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2}}"
 
 
-####
+#
 Outputs:
   InstancePublicIP:
      Description: Public IP of the EC2 instance
