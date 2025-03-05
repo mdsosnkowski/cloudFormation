@@ -29,17 +29,33 @@ Resources:
  MyS3Bucket:
     Type: AWS::S3::Bucket
 
+# RDS for scraper metadata
+ MyRDS:
+    Type: AWS::RDS::DBInstance
+    Properties:
+      DBInstanceClass: db.t3.micro
+      Engine: mysql
+      MasterUsername: admin
+      MasterUserPassword: Password123
+      AllocatedStorage: 20
+      PubliclyAccessible: true
 
 Outputs:
 # EC2 Instance IP
-  InstancePublicIP:S
+  InstancePublicIP:
     Description: Public IP of the EC2 instance
     Value: !GetAtt MyEC2Instance.PublicIp
 
 # S3 Bucket name
   BucketName:
-    Value: !Ref MyS3Bucket
     Description: Name of S3 bucket
+    Value: !Ref MyS3Bucket
+    
+# RDS name
+  InstanceId:
+    Description: InstanceID of newly created RDS Instance
+    Value: !Ref MyRDS
+   
   
 
 
