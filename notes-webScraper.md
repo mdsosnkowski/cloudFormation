@@ -5,7 +5,8 @@ For promt shorting in CLI: export PS1="\W\$ "
 ## MARCH 2025
 
 #### Wed 5
-Create S3 buscket for holding imaged. File name is webScraper_EC2_S3.yaml
+Create S3 bucket for holding images in file: webScraper_EC2_S3.yaml
+Created RDS minimal build with new file called: webScraper_EC2_S3_RDS.yaml
 
 #### Tue 4
 Changed all names to reflect the name of the project "webScraper" with a list of the resources being provisioned of each step. As well adding in assertions to check if the code is correct.
