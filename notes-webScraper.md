@@ -1,8 +1,11 @@
 # Web Scraper Notes and Log
-For markdown preview: Ctrl-K V
-For promt shorting in CLI: export PS1="\W\$ "
- 
+For markdown preview: Ctrl-K V  
+For promt shorting in CLI: export PS1="\W\$ "  
+[Design](https://youtu.be/51r3zPOun5g?si=MR2AjWEhBgGIDdSw)
 ## MARCH 2025
+#### Tue 11
+Create VPC with internet gateway and db in private and web in public
+Create CloudWatch
 
 #### Wed 5
 Create S3 bucket for holding images in file: webScraper_EC2_S3.yaml
@@ -31,3 +34,20 @@ NOTE: try to use a non-hardcodded Instance type
 #### Sat 22 - EC2 basic instance setup
 Used AI to help and CFN docs to clarify the use of /
 the ami generic version: ImageId: !Sub "{{resolve:ssm:/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2}}"
+
+ myVPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: 10.0.0.0/16
+      EnableDnsHostnames: 'true'
+      EnableDnsSupport: 'true'
+  mySubnetPublic:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref myVPC
+      CidrBlock: 10.0.0.0/24
+  mySubnetPrivate:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref myVPC
+      CidrBlock: 10.0.1.0/24
