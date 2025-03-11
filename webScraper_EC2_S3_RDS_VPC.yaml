@@ -6,7 +6,7 @@ AWSTemplateFormatVersion: "2010-09-09"
 # aws cloudformation validate-template --template-body file:///mnt/c/Users/Joasia/Documents/MikeStuff/CloudFormationProjects/cloudFormation/webScraper_EC2_S3_RDS_VPC.yaml
 #
 # Deploy stack
-#
+# aws cloudformation create-stack   --stack-name my-stack   --template-body  file:///mnt/c/Users/Joasia/Documents/MikeStuff/CloudFormationProjects/cloudFormation/webScraper_EC2_S3_RDS_VPC.yaml  
 #
 # Delete stack
 # aws cloudformation delete-stack   --stack-name my-stack
