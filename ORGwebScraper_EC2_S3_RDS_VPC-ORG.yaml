@@ -41,7 +41,7 @@ Resources:
  myInternetGateway:
    Type: AWS::EC2::InternetGateway
    Properties:
-     Tages:
+     Tags:
      - Key: Name
        Value: Public subnet 
 # AttachGateway to VPC
@@ -118,7 +118,6 @@ Outputs:
     Value: !Ref MyRDS
    
   
-
 
 
 

@@ -3,6 +3,11 @@ For markdown preview: Ctrl-K V
 For promt shorting in CLI: export PS1="\W\$ "  
 [Design](https://youtu.be/51r3zPOun5g?si=MR2AjWEhBgGIDdSw)
 ## MARCH 2025
+
+#### Wed 12
+
+ FINISH UP THE RDS WITH SUBNETGROUP AND MULIT AZ
+
 #### Tue 11
 Create VPC with internet gateway and db in private and web in public
 Create CloudWatch
