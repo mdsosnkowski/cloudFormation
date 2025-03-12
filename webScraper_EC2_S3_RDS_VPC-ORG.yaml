@@ -51,6 +51,30 @@ Resources:
      VpcId: !Ref myVPC
      InternetGatewayId: !Ref myInternetGateway
 
+# myRouteTable for EC2 to get to the InternetGateway
+ myRouteTable:
+   Type: AWS::EC2::RouteTable
+   Properties:
+     VpcId: !Ref myVPC
+     Tags:
+     - Key: route
+       Value: public
+# myRoute
+ myRoute: 
+   Type: AWS::EC2::Route
+    #DependsOn: GatewayToInternet
+   Properties:
+    RouteTableId: !Ref myRouteTable
+    DestinationCidrBlock: 0.0.0.0/0
+    GatewayId: 
+      Ref: myInternetGateway
+
+# mySubnet Route Table Association for public 
+ mySubnetRouteTableAssociation:
+   Type: AWS::EC2::SubnetRouteTableAssociation
+   Properties: 
+     SubnetId: !Ref  mySubnetPublic
+     RouteTableId: !Ref myRouteTable
 
 # Web scraper server
  MyEC2Instance:
