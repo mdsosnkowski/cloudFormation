@@ -31,11 +31,19 @@ Resources:
     Properties:
       VpcId: !Ref myVPC
       CidrBlock: 10.0.0.0/24
- mySubnetPrivate:
+      AvailabilityZone: !Select [ 0, !GetAZs '' ]
+ mySubnetPrivate1:
     Type: AWS::EC2::Subnet
     Properties:
       VpcId: !Ref myVPC
       CidrBlock: 10.0.1.0/24
+      AvailabilityZone: !Select [ 1, !GetAZs '' ]
+ mySubnetPrivate2:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref myVPC
+      CidrBlock: 10.0.2.0/24
+      AvailabilityZone: !Select [ 2, !GetAZs '' ]
 
 # myInternetGateway for public subnet
  myInternetGateway:
@@ -78,21 +86,16 @@ Resources:
      SubnetId: !Ref  mySubnetPublic
      RouteTableId: !Ref myRouteTable
 
-# Web scraper server
- MyEC2Instance:
-    Type: AWS::EC2::Instance
-    Properties:
-      InstanceType: !Ref InstanceType
-      #ImageId: ami-0c104f6f4a5d9d1d5
-      ImageId: !Sub "{{resolve:ssm:/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2}}"
-      # Associate EC2 with the public subnet 10.0.0.0/24
-      SubnetId: !Ref mySubnetPublic
+# Subnet for the RDS instances in two AZ
+ myDBSubnetGroup:
+   Type: AWS::RDS::DBSubnetGroup
+   Properties:
+     DBSubnetGroupDescription: "myDBSubnetGroupDescription"
+     SubnetIds:
+     - !Ref mySubnetPrivate1
+     - !Ref mySubnetPrivate2 
 
-# Bucket for images
- MyS3Bucket:
-    Type: AWS::S3::Bucket
-
-# RDS for scraper metadata in multi-AZ
+# RDS for scraper metadata in two-AZ
  MyRDS:
     Type: AWS::RDS::DBInstance
     Properties:
@@ -102,23 +105,41 @@ Resources:
       MasterUserPassword: Password123
       AllocatedStorage: 20
       PubliclyAccessible: true
-    # Associate the RDS with the private subnet 10.0.1.0/4
+      DBSubnetGroupName: !Ref myDBSubnetGroup
 
-Outputs:
+
+
+
+
+# Web scraper server
+# MyEC2Instance:
+#    Type: AWS::EC2::Instance
+#    Properties:
+#      InstanceType: !Ref InstanceType
+#      #ImageId: ami-0c104f6f4a5d9d1d5
+#      ImageId: !Sub "{{resolve:ssm:/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2}}"
+#      # Associate EC2 with the public subnet 10.0.0.0/24
+#      SubnetId: !Ref mySubnetPublic
+
+# Bucket for images
+# MyS3Bucket:
+#    Type: AWS::S3::Bucket
+
+#Outputs:
 # EC2 Instance IP
-  InstancePublicIP:
-    Description: Public IP of the EC2 instance
-    Value: !GetAtt MyEC2Instance.PublicIp
+#  InstancePublicIP:
+#    Description: Public IP of the EC2 instance
+#    Value: !GetAtt MyEC2Instance.PublicIp
 
 # S3 Bucket name
-  BucketName:
-    Description: Name of S3 bucket
-    Value: !Ref MyS3Bucket
+#  BucketName:
+#    Description: Name of S3 bucket
+#    Value: !Ref MyS3Bucket
     
 # RDS name
-  InstanceId:
-    Description: InstanceID of newly created RDS Instance
-    Value: !Ref MyRDS
+#  InstanceId:
+#    Description: InstanceID of newly created RDS Instance
+#    Value: !Ref MyRDS
 
 
 

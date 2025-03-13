@@ -7,6 +7,7 @@ For promt shorting in CLI: export PS1="\W\$ "
 #### Thu 13
 
 RDS in mulitiple AZ for active and standby SQL needed.
+Done by need to check as build did not finish but no rDS issues!
 
 #### Wed 12
 
