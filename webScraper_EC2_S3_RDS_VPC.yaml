@@ -88,7 +88,40 @@ Resources:
       # Associate EC2 with the public subnet 10.0.0.0/24
       SubnetId: !Ref mySubnetPublic
 
-# FINISH UP THE RDS WITH SUBNETGROUP AND MULIT AZ
+# Bucket for images
+ MyS3Bucket:
+    Type: AWS::S3::Bucket
+
+# RDS for scraper metadata in multi-AZ
+ MyRDS:
+    Type: AWS::RDS::DBInstance
+    Properties:
+      DBInstanceClass: db.t3.micro
+      Engine: mysql
+      MasterUsername: admin
+      MasterUserPassword: Password123
+      AllocatedStorage: 20
+      PubliclyAccessible: true
+    # Associate the RDS with the private subnet 10.0.1.0/4
+
+Outputs:
+# EC2 Instance IP
+  InstancePublicIP:
+    Description: Public IP of the EC2 instance
+    Value: !GetAtt MyEC2Instance.PublicIp
+
+# S3 Bucket name
+  BucketName:
+    Description: Name of S3 bucket
+    Value: !Ref MyS3Bucket
+    
+# RDS name
+  InstanceId:
+    Description: InstanceID of newly created RDS Instance
+    Value: !Ref MyRDS
+
+
+
 
 
 

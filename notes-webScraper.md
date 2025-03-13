@@ -4,9 +4,14 @@ For promt shorting in CLI: export PS1="\W\$ "
 [Design](https://youtu.be/51r3zPOun5g?si=MR2AjWEhBgGIDdSw)
 ## MARCH 2025
 
+#### Thu 13
+
+RDS in mulitiple AZ for active and standby SQL needed.
+
 #### Wed 12
 
- FINISH UP THE RDS WITH SUBNETGROUP AND MULIT AZ
+Debug VPC lodding: issue was misspelling of "Tags" which caused rollback of build eventhough passed validation.
+Conclusion: valdation does not catch spelling mistakes and is limited in checking for quality
 
 #### Tue 11
 Create VPC with internet gateway and db in private and web in public
