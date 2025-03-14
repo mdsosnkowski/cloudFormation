@@ -1,18 +1,17 @@
 AWSTemplateFormatVersion: "2010-09-09"
-# TITLE: webScraper_EC2_S3_RDS_VPC
+# TITLE: webScraper_EC2_S3_RDS_VPC_IAM
 #
-## WebScraper Applicaiton using EC2, S3, RDS, VPC, IAM, and CLOUDWATCH
+# WebScraper Applicaiton using EC2, S3, RDS, VPC, IAM, and CLOUDWATCH
 # From https://youtu.be/51r3zPOun5g?si=MR2AjWEhBgGIDdSw
 #
 # Validate stack template:
-# aws cloudformation validate-template --template-body file:///mnt/c/Users/Joasia/Documents/MikeStuff/CloudFormationProjects/cloudFormation/webScraper_EC2_S3_RDS_VPC_IAM.yaml
+# aws cloudformation validate-template --template-body file:///mnt/c/Users/Joasia/Documents/MikeStuff/CloudFormationProjects/cloudFormation/webScraper_EC2_S3_RDS_VPC.yaml
 #
-# Create stack:
-# aws cloudformation create-stack   --stack-name my-stack   --template-body  file:///mnt/c/Users/Joasia/Documents/MikeStuff/CloudFormationProjects/cloudFormation/webScraper_EC2_S3_RDS_VPC_IAM.yaml
+# Deploy stack
+# aws cloudformation create-stack   --stack-name my-stack   --template-body  file:///mnt/c/Users/Joasia/Documents/MikeStuff/CloudFormationProjects/cloudFormation/webScraper_EC2_S3_RDS_VPC.yaml
 #
-# Delete stack:
+# Delete stack
 # aws cloudformation delete-stack   --stack-name my-stack
-#
 # NOTE: do not put the parameters in the cli command as theses are in the config
 # NOTE: try to use a non-hardcodded Instance type
 #######################################################
@@ -93,29 +92,30 @@ Resources:
      SubnetId: !Ref  mySubnetPublic
      RouteTableId: !Ref myRouteTable
 
+# REMOVED DATBASES UNTIL IAM WORKING FOR EC2 INSTANCES AND S3
 # Subnet for the RDS instances in two AZ
- myDBSubnetGroup:
-   Type: AWS::RDS::DBSubnetGroup
-   Properties:
-     # Manditory to have a description
-     DBSubnetGroupDescription: "myDBSubnetGroupDescription"
-     # Need minimum of 2 subnets for the primary and secondary
-     SubnetIds:
-     - !Ref mySubnetPrivate1
-     - !Ref mySubnetPrivate2 
+# myDBSubnetGroup:
+#   Type: AWS::RDS::DBSubnetGroup
+#   Properties:
+#     # Manditory to have a description
+#     DBSubnetGroupDescription: "myDBSubnetGroupDescription"
+#     # Need minimum of 2 subnets for the primary and secondary
+#     SubnetIds:
+#     - !Ref mySubnetPrivate1
+#     - !Ref mySubnetPrivate2 
 
 # RDS for scraper metadata in two-AZ
- MyRDS:
-    Type: AWS::RDS::DBInstance
-    Properties:
-      DBInstanceClass: db.t3.micro
-      Engine: mysql
-      MasterUsername: admin
-      MasterUserPassword: Password123
-      AllocatedStorage: 20
-      PubliclyAccessible: true
-      # Associate the RDS instance with the AZs and subnets
-      DBSubnetGroupName: !Ref myDBSubnetGroup
+# MyRDS:
+#    Type: AWS::RDS::DBInstance
+#    Properties:
+#      DBInstanceClass: db.t3.micro
+#      Engine: mysql
+#      MasterUsername: admin
+#      MasterUserPassword: Password123
+#      AllocatedStorage: 20
+#      PubliclyAccessible: true
+#      # Associate the RDS instance with the AZs and subnets
+#      DBSubnetGroupName: !Ref myDBSubnetGroup
 
 # Web scraper server
  MyEC2Instance:
@@ -143,9 +143,9 @@ Outputs:
     Value: !Ref MyS3Bucket
     
 # RDS name
-  InstanceId:
-    Description: InstanceID of newly created RDS Instance
-    Value: !Ref MyRDS
+#  InstanceId:
+#    Description: InstanceID of newly created RDS Instance
+#    Value: !Ref MyRDS
 
 
 
