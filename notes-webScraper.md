@@ -4,13 +4,18 @@ For promt shorting in CLI: export PS1="\W\$ "
 [Design](https://youtu.be/51r3zPOun5g?si=MR2AjWEhBgGIDdSw)
 ## MARCH 2025
 
-#### Thu 13
+#### Fri 14
+Re-test RDS build if located servers in private subnets of VPC.  
+- Confirmed, tested, and working!!  
 
+Review viedeo on how to setup authentication with IAM.  
+
+
+#### Thu 13
 RDS in mulitiple AZ for active and standby SQL needed.
-Done by need to check as build did not finish but no rDS issues!
+Done by need to check as build did not finish but no RDS issues!
 
 #### Wed 12
-
 Debug VPC lodding: issue was misspelling of "Tags" which caused rollback of build eventhough passed validation.
 Conclusion: valdation does not catch spelling mistakes and is limited in checking for quality
 
