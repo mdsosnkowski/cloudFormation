@@ -4,11 +4,13 @@ For promt shorting in CLI: export PS1="\W\$ "
 [Design](https://youtu.be/51r3zPOun5g?si=MR2AjWEhBgGIDdSw)
 ## MARCH 2025
 
-#### Fri 14
-Re-test RDS build if located servers in private subnets of VPC.  
-- Confirmed, tested, and working!!  
-
+#### 
 Review viedeo on how to setup authentication with IAM.  
+
+#### Fri 14
+Fixed PublicIP output not working by listing "private" 
+Re-test RDS build if located servers in private subnets of VPC.  
+- Confirmed, tested, and working.  
 
 
 #### Thu 13

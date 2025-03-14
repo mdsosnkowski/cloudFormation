@@ -135,13 +135,15 @@ Outputs:
 # EC2 Instance IP
   InstancePublicIP:
     Description: Public IP of the EC2 instance
-    Value: !GetAtt MyEC2Instance.PublicIp
+    Value: !GetAtt MyEC2Instance.PrivateIp
+
 
 # S3 Bucket name
   BucketName:
     Description: Name of S3 bucket
     Value: !Ref MyS3Bucket
-    
+
+# REMOVED UNTIL IAM WOKING WITH EC2 AND S3 
 # RDS name
 #  InstanceId:
 #    Description: InstanceID of newly created RDS Instance
