@@ -7,6 +7,11 @@ For promt shorting in CLI: export PS1="\W\$ "
 #### 
 Review viedeo on how to setup authentication with IAM.  
 
+#### Wed 19
+For IAM do the following:  
+1. EC2 write permissions to S3  
+2. EC2 read/write permissions to RDS
+
 #### Fri 14
 Fixed PublicIP output not working by listing "private" 
 Re-test RDS build if located servers in private subnets of VPC.  
