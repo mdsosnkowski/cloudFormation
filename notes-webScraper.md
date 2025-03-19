@@ -12,6 +12,11 @@ For IAM do the following:
 1. EC2 write permissions to S3  
 2. EC2 read/write permissions to RDS
 
+In AWS CloudFormation, you grant an EC2 instance read/write access to an S3 bucket by:
+
+  1. Creating an IAM Role with an IAM Policy that allows S3 access.
+  2. Attaching the IAM Role to an Instance Profile.
+  3. Associating the Instance Profile with the EC2 instance.
 #### Fri 14
 Fixed PublicIP output not working by listing "private" 
 Re-test RDS build if located servers in private subnets of VPC.  

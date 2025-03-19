@@ -5,10 +5,10 @@ AWSTemplateFormatVersion: "2010-09-09"
 # From https://youtu.be/51r3zPOun5g?si=MR2AjWEhBgGIDdSw
 #
 # Validate stack template:
-# aws cloudformation validate-template --template-body file:///mnt/c/Users/Joasia/Documents/MikeStuff/CloudFormationProjects/cloudFormation/webScraper_EC2_S3_RDS_VPC.yaml
+# aws cloudformation validate-template --template-body file:///mnt/c/Users/Joasia/Documents/MikeStuff/CloudFormationProjects/cloudFormation/webScraper_EC2_S3_RDS_VPC_IAM.yaml
 #
 # Deploy stack
-# aws cloudformation create-stack   --stack-name my-stack   --template-body  file:///mnt/c/Users/Joasia/Documents/MikeStuff/CloudFormationProjects/cloudFormation/webScraper_EC2_S3_RDS_VPC.yaml
+# aws cloudformation create-stack   --stack-name my-stack   --template-body  file:///mnt/c/Users/Joasia/Documents/MikeStuff/CloudFormationProjects/cloudFormation/webScraper_EC2_S3_RDS_VPC_IAM.yaml
 #
 # Delete stack
 # aws cloudformation delete-stack   --stack-name my-stack
@@ -91,6 +91,9 @@ Resources:
    Properties: 
      SubnetId: !Ref  mySubnetPublic
      RouteTableId: !Ref myRouteTable
+# Bucket for images
+ MyS3Bucket:
+    Type: AWS::S3::Bucket
 
 # REMOVED DATBASES UNTIL IAM WORKING FOR EC2 INSTANCES AND S3
 # Subnet for the RDS instances in two AZ
@@ -126,10 +129,49 @@ Resources:
       ImageId: !Sub "{{resolve:ssm:/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2}}"
       # Associate EC2 with the public subnet 10.0.0.0/24
       SubnetId: !Ref mySubnetPublic
+      IamInstanceProfile: !Ref EC2InstanceProfile
 
-# Bucket for images
- MyS3Bucket:
-    Type: AWS::S3::Bucket
+##
+## ISSUE: An error occurred (ValidationError) when calling the ValidateTemplate operation: Invalid template property 
+## or properties [EC2S3AccessRole, EC2InstanceProfile]
+##
+
+
+EC2InstanceProfile:
+  Type: AWS::IAM::InstanceProfile
+  Properties:
+    Roles:
+      - !Ref EC2AccessRole
+
+EC2S3AccessRole:
+  Type: AWS::IAM::Role 
+  Properties:
+    AssumeRolePolicyDocument:
+      Version: "2012-10-17"
+      Statement:
+       - Effect: Allow
+         Principal:
+           Services: ec2.amazonaws.com
+         Action: sts:AssumeRole
+    Policies:
+     - PolicyName: S3ReadWritePolicy
+       PolicyDocumnet:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Action:
+              - s3:GetObject
+              - s3:PutObject
+              - s3:ListBucket
+            Resources:
+              - !Sub arn:aws:s3:::${MyS3Bucket}
+              - !Sub arn:aws:s3:::${MyS3Bucket}/*
+
+
+
+
+
+
 
 Outputs:
 # EC2 Instance IP
