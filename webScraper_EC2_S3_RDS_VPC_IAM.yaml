@@ -8,7 +8,8 @@ AWSTemplateFormatVersion: "2010-09-09"
 # aws cloudformation validate-template --template-body file:///mnt/c/Users/Joasia/Documents/MikeStuff/CloudFormationProjects/cloudFormation/webScraper_EC2_S3_RDS_VPC_IAM.yaml
 #
 # Deploy stack
-# aws cloudformation create-stack   --stack-name my-stack   --template-body  file:///mnt/c/Users/Joasia/Documents/MikeStuff/CloudFormationProjects/cloudFormation/webScraper_EC2_S3_RDS_VPC_IAM.yaml
+# NOTE: When using the AWS CLI to create or update a stack that includes IAM resources, you must specify the capability using the --capabilities flag
+# aws cloudformation create-stack   --stack-name my-stack --template-body  file:///mnt/c/Users/Joasia/Documents/MikeStuff/CloudFormationProjects/cloudFormation/webScraper_EC2_S3_RDS_VPC_IAM.yaml --capabilities CAPABILITY_IAM
 #
 # Delete stack
 # aws cloudformation delete-stack   --stack-name my-stack
@@ -26,8 +27,9 @@ Resources:
     Type: AWS::EC2::VPC
     Properties:
       CidrBlock: 10.0.0.0/16
-      EnableDnsHostnames: 'true'
-      EnableDnsSupport: 'true'
+      EnableDnsSupport: true
+      EnableDnsHostnames: true
+      
  mySubnetPublic:
     Type: AWS::EC2::Subnet
     Properties:
@@ -137,15 +139,15 @@ Resources:
 ##
 
 
-EC2InstanceProfile:
-  Type: AWS::IAM::InstanceProfile
-  Properties:
-    Roles:
+ EC2InstanceProfile:
+   Type: AWS::IAM::InstanceProfile
+   Properties:
+     Roles:
       - !Ref EC2AccessRole
 
-EC2S3AccessRole:
-  Type: AWS::IAM::Role 
-  Properties:
+ EC2AccessRole:
+   Type: AWS::IAM::Role 
+   Properties:
     AssumeRolePolicyDocument:
       Version: "2012-10-17"
       Statement:
@@ -155,7 +157,7 @@ EC2S3AccessRole:
          Action: sts:AssumeRole
     Policies:
      - PolicyName: S3ReadWritePolicy
-       PolicyDocumnet:
+       PolicyDocument:
         Version: "2012-10-17"
         Statement:
           - Effect: Allow
