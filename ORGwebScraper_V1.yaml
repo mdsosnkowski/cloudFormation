@@ -15,6 +15,7 @@ AWSTemplateFormatVersion: "2010-09-09"
 # aws cloudformation delete-stack   --stack-name my-stack
 # NOTE: do not put the parameters in the cli command as theses are in the config
 # NOTE: try to use a non-hardcodded Instance type
+# NOTE: You cannot create EC2 keys as part of the build.
 #######################################################
 Parameters:
   InstanceType:
@@ -37,6 +38,8 @@ Resources:
       CidrBlock: 10.0.0.0/24
       # Associate the subnet to an AZ
       AvailabilityZone: !Select [ 0, !GetAZs '' ]
+      MapPublicIpOnLaunch: true
+
   mySubnetPrivate1:
     Type: AWS::EC2::Subnet
     Properties:
@@ -44,6 +47,7 @@ Resources:
       CidrBlock: 10.0.1.0/24
       # Associate the subnet to an AZ
       AvailabilityZone: !Select [ 1, !GetAZs '' ]
+
   mySubnetPrivate2:
     Type: AWS::EC2::Subnet
     Properties:
@@ -131,11 +135,17 @@ Resources:
                 Resource:
                   - !Sub "arn:aws:s3:::${MyS3Bucket}"
                   - !Sub "arn:aws:s3:::${MyS3Bucket}/*" 
-
+# Key
+  MyKeyPair:
+    Type: AWS::EC2::KeyPair
+    Properties:
+      KeyName: MyGeneratedKey
+## 
 # Web scraper server
   MyEC2Instance:
     Type: AWS::EC2::Instance
     Properties:
+      KeyName: !Ref MyKeyPair  # Attach the newly created key
       InstanceType: !Ref InstanceType
       #ImageId: ami-0c104f6f4a5d9d1d5
       ImageId: !Sub "{{resolve:ssm:/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2}}"
@@ -143,6 +153,15 @@ Resources:
       SubnetId: !Ref mySubnetPublic
       # Grant permissions to EC2 to access S3 bucket
       IamInstanceProfile: !Ref EC2InstanceProfile
+
+# EIP nic for the instance to get a public ip address
+  MyEIP:
+    Type: AWS::EC2::EIP
+    Properties:
+      InstanceID: !Ref MyEC2Instance
+
+
+
 
 # Subnet for the RDS instances in two AZ
   myDBSubnetGroup:
@@ -180,9 +199,9 @@ Outputs:
     Value: !Ref MyS3Bucket
 
 # RDS Name
-  InstanceId:
-    Description: InstanceID of newly created RDS Instance
-    Value: !Ref MyRDS
+  #InstanceId:
+   # Description: InstanceID of newly created RDS Instance
+    #Value: !Ref MyRDS
 
 
 
