@@ -3,6 +3,10 @@ For markdown preview: Ctrl-K V
 For promt shorting in CLI: export PS1="\W\$ "  
 [Design](https://youtu.be/51r3zPOun5g?si=MR2AjWEhBgGIDdSw)
 ## MARCH 2025
+#### Fri 28
+Created basic EC2 for testing the "connect" feature of the console. it did not work so read: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-connect-prerequisites.html.
+#### Thu 27
+Played with SQS queues to understand disributed data entry.  
 #### Wed 26
 Combined RDS, EC2 Profiles, and all else into one new build called webScraper_V1.yaml.  
 Next: Build scraper code with python flask on replit and run on the ec2 instances manually.  
