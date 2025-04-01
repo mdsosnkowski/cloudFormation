@@ -154,9 +154,8 @@ Resources:
       IamInstanceProfile: !Ref EC2InstanceProfile
       # How to enable console Connect? A: Allow ssh in SG
       SecurityGroupIds: 
-        - !Ref MySecurityGroup
-
-
+        # For non-default VPC must use gett
+        - !GetAtt MySecurityGroup.GroupId
 
 
 # Subnet for the RDS instances in two AZ
