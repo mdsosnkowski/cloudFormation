@@ -1,6 +1,6 @@
 AWSTemplateFormatVersion: "2010-09-09"
-# TITLE: webScraper_V2
-# SERVICES: EC2-S3-RDS-VPC-IAM-EC2connectLogin-AccessForEC2Rds-
+# TITLE: webScraper_V2_EC2
+# SERVICES: EC2-S3-RDS-VPC-IAM-EC2connectLogin working.
 # WebScraper Applicaiton using EC2, S3, RDS, VPC, IAM, will need CLOUDWATCH
 # From https://youtu.be/51r3zPOun5g?si=MR2AjWEhBgGIDdSw
 #
@@ -134,6 +134,8 @@ Resources:
     Type: AWS::EC2::SecurityGroup
     Properties:
       GroupDescription: "SSH for console Connect access"
+      # For non-default VPC must include VpcId to connect SG with VPC
+      VpcId: !Ref myVPC
       SecurityGroupIngress:
         - IpProtocol: tcp # add -1 for all protocols
           FromPort: 22
@@ -207,10 +209,11 @@ Outputs:
 #
 # Deploy stack
 # NOTE: When using the AWS CLI to create or update a stack that includes IAM resources, you must specify the capability using the --capabilities flag
-#  
+# aws cloudformation create-stack   --stack-name my-stack --template-body  file:///mnt/c/Users/Joasia/Documents/MikeStuff/CloudFormationProjects/cloudFormation/webScraper_V2.yaml --capabilities CAPABILITY_NAMED_IAM  
 #
 # Delete stack
 # aws cloudformation delete-stack   --stack-name my-stack
+#
 # NOTE: do not put the parameters in the cli command as theses are in the config
 # NOTE: try to use a non-hardcodded Instance type
 # NOTE: You cannot create EC2 keys as part of the build.
