@@ -171,20 +171,7 @@ Resources:
       - !Ref mySubnetPrivate1
       - !Ref mySubnetPrivate2 
 
-# Security Group for loggin into RDS from EC2
-  MyRDSSecurityGroup:
-    Type: AWS::EC2::SecurityGroup
-    Properties:
-      GroupDescription: "SSH for console Connect access"
-      # For non-default VPC must include VpcId to connect SG with VPC
-      VpcId: !Ref myVPC
-      SecurityGroupIngress:
-        - IpProtocol: tcp # add -1 for all protocols
-          FromPort: 3306
-          ToPort: 3306
-          CidrIp: 0.0.0.0/0 # open to world non production  
-
-
+# Q: HOW TO CONNEC TO RDS ON 3306 FROM EC2 INSTANCE?
 # RDS for scraper metadata in two-AZ
   MyRDS:
     Type: AWS::RDS::DBInstance
@@ -197,9 +184,7 @@ Resources:
       PubliclyAccessible: true
       # Associate the RDS instance with the AZs and subnets
       DBSubnetGroupName: !Ref myDBSubnetGroup
-      SecurityGroupIds: 
-      # For non-default VPC must use gett
-      - !GetAtt MyRDSSecurityGroup.GroupId
+
 
 
 Outputs:

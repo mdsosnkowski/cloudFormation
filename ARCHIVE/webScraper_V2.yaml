@@ -209,7 +209,7 @@ Outputs:
 #
 # Deploy stack
 # NOTE: When using the AWS CLI to create or update a stack that includes IAM resources, you must specify the capability using the --capabilities flag
-# aws cloudformation create-stack   --stack-name my-stack --template-body  file:///mnt/c/Users/Joasia/Documents/MikeStuff/CloudFormationProjects/cloudFormation/webScraper_V2.yaml --capabilities CAPABILITY_NAMED_IAM  
+# aws cloudformation create-stack   --stack-name my-stack --template-body  file:///mnt/c/Users/Joasia/Documents/MikeStuff/CloudFormationProjects/cloudFormation/webScraper_V3.yaml --capabilities CAPABILITY_NAMED_IAM  
 #
 # Delete stack
 # aws cloudformation delete-stack   --stack-name my-stack
