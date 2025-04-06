@@ -1,8 +1,12 @@
-# Web Scraper Notes and Log
+# Web Scraper Notes and Log - DONE as of April 6 2025
 For markdown preview: Ctrl-K V  
 For promt shorting in CLI: export PS1="\W\$ "  
 [Design](https://youtu.be/51r3zPOun5g?si=MR2AjWEhBgGIDdSw)
 ## APRIL 2025
+#### Sun 6
+Completed Version 3 of the webScraper!!  
+Uncompleted features: Web scarping applicaition software on EC2 instance, Scheme for RDS to hold records of web scrape, and method of access for EC2 application to access the RDS database. CloudWatch to monitor use.
+DONE: EC2, VPC with publich and private subnets, RDS with security group, and EC2 with security group.  
 #### Wed 2
 How to associate an SG to the instance Subnet? A: Reference the VPC in the SG config with VpcId: !Ref myVCP.
 Test login to EC2 host with Connect - WORKING!!  
