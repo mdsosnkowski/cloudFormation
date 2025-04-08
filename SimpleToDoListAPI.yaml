@@ -1,3 +1,50 @@
 # Title: Simple To-Do List API
-# Date: 
+# Date: April 8 to April XX 2025
 # AI created Labt to learn Lambda, API Gateway, and DynamoDB.
+# AI chat link: https://chatgpt.com/c/67f336c5-9df4-800d-a890-280f0a75df66
+# Lambda: execute the business logic
+# API Gateway: Exposes the HTTP Endpoints
+# DynamoDB Stores the to-do items.
+# 
+###########################################
+AWSTemplateFormatVersion: '2010-09-09'
+Resources:
+ # DynamoDB: Primary key is "id" and tablename is "ToDoItems"
+ # TEST: yes it build in cloud formation 4-8-2025
+  DDBTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: "ToDoItems"
+      AttributeDefinitions:
+        -
+          AttributeName: "id"
+          AttributeType: "S"
+      KeySchema: 
+        -
+          AttributeName: "id"
+          KeyType: "HASH"
+      ProvisionedThroughput:
+        ReadCapacityUnits: 5
+        WriteCapacityUnits: 2
+
+ # Lambda Function: 3 functions for "createItem, getItems, and deleteItem"
+
+ # APIGW: setup methods "POST /todos, GET /todos, DELETE /todo?id=some-id"
+
+ # IAM Policy to read and write
+
+
+ #######################################################
+ # Validate stack template:
+# aws cloudformation validate-template --template-body file:///mnt/c/Users/Joasia/Documents/MikeStuff/CloudFormationProjects/cloudFormation/SimpleToDoListAPI.yaml
+#
+# Deploy stack
+# NOTE: When using the AWS CLI to create or update a stack that includes IAM resources, you must specify the capability using the --capabilities flag
+# aws cloudformation create-stack   --stack-name my-stack --template-body  file:///mnt/c/Users/Joasia/Documents/MikeStuff/CloudFormationProjects/cloudFormation/SimpleToDoListAPI.yaml --capabilities CAPABILITY_NAMED_IAM  
+#
+# Delete stack
+# aws cloudformation delete-stack   --stack-name my-stack
+#
+# NOTE: do not put the parameters in the cli command as theses are in the config
+# NOTE: try to use a non-hardcodded Instance type
+# NOTE: You cannot create EC2 keys as part of the build.
