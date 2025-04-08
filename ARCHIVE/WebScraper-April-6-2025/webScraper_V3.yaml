@@ -1,5 +1,12 @@
 AWSTemplateFormatVersion: "2010-09-09"
-
+# DONE: EC2, VPC with publich and private subnets, RDS with security group, and EC2 with security group.  
+# TITLE: webScraper_V2_EC2
+# SERVICES: EC2-S3-RDS-VPC-IAM-EC2connectLogin working.
+# WebScraper Applicaiton using EC2, S3, RDS, VPC, IAM, will need CLOUDWATCH
+# From https://youtu.be/51r3zPOun5g?si=MR2AjWEhBgGIDdSw
+# Completed Version 3 of the webScraper build on April 6 2025.  
+# Uncompleted features: Web scarping applicaition software on EC2 instance, Scheme for RDS to hold records of web scrape, and method of access for EC2 application to access the RDS database. CloudWatch to monitor use.
+#######################################################
 Parameters:
   InstanceType:
     Type: String
