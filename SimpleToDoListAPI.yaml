@@ -28,9 +28,20 @@ Resources:
         WriteCapacityUnits: 2
 
  # Lambda Function: 3 functions for "createItem, getItems, and deleteItem"
+  CreateItemFunction:
+    Type: AWS::Lambda::Function
+
+  GetItemsFunction:
+    Type: AWS::Lambda::Function
+
+  DeleteItemFunction:
+    Type: AWS::Lambda::Function
 
  # APIGW: setup methods "POST /todos, GET /todos, DELETE /todo?id=some-id"
-
+   # POST /items -> CreateItemFunction  
+   #GET /items -> GetItemsFunction  
+   #DELETE /items/{id} -> DeleteItemFunction
+ 
  # IAM Policy to read and write
 
 
