@@ -9,6 +9,16 @@
 ###########################################
 AWSTemplateFormatVersion: '2010-09-09'
 Resources:
+
+# S3 bucket for lambda code
+  S3Bucket:
+    Type: 'AWS::S3::Bucket' 
+    DeletionPolicy: Delete
+    Properties:
+      BucketName: Code-Bucket
+    
+
+
  # DynamoDB: Primary key is "id" and tablename is "ToDoItems"
  # TEST: yes it build in cloud formation 4-8-2025
   DDBTable:
@@ -27,15 +37,21 @@ Resources:
         ReadCapacityUnits: 5
         WriteCapacityUnits: 2
 
- # Lambda Function: 3 functions for "createItem, getItems, and deleteItem"
-  CreateItemFunction:
+ # Lambda Execution role
+ 
+ # Lambda Function: one function for "createItem, getItems, and deleteItem"
+  ItemLambdaFunction:
     Type: AWS::Lambda::Function
-
-  GetItemsFunction:
-    Type: AWS::Lambda::Function
-
-  DeleteItemFunction:
-    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: item-python-function
+      Handler: index.handler # index.py file with function named handler
+      #Role: !GetAtt LambdaExecutionRole.Arn # NEED TO CREATE THIS!!!
+      Code:
+        S3Bucket: code-bucket # need pre
+        #S3key: lambda-code.zip
+      Runtime: python3.10
+      Timeout: 10
+      MemorySize: 128
 
  # APIGW: setup methods "POST /todos, GET /todos, DELETE /todo?id=some-id"
    # POST /items -> CreateItemFunction  
@@ -59,3 +75,9 @@ Resources:
 # NOTE: do not put the parameters in the cli command as theses are in the config
 # NOTE: try to use a non-hardcodded Instance type
 # NOTE: You cannot create EC2 keys as part of the build.
+###################################
+#
+# WORK LOG
+#
+# T 4/10: need to create a lambda role
+# W 4/09: create lambda function
