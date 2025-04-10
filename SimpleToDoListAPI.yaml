@@ -43,14 +43,14 @@ Resources:
   Properties:
     FunctionName: item-python-function
     Handler: index.handler
-    Role: arn:aws:iam::533267198585:role/cfst-1449-56d6b82b5af86e591f4074e8065b41-LambdaRole-evjCXW5F1xMO
+    Role: !Ref 
     Code:
       S3Bucket: ks3://kflddfdfdaadfd93459348578934
       S3Key: index.zip
     Runtime: python3.10
     Timeout: 10
     MemorySize: 128
-
+# https://github.com/mdsosnkowski/cloudFormation/blob/main/index.zip
  # APIGW: setup methods "POST /todos, GET /todos, DELETE /todo?id=some-id"
    # POST /items -> CreateItemFunction  
    #GET /items -> GetItemsFunction  
