@@ -11,47 +11,45 @@ AWSTemplateFormatVersion: '2010-09-09'
 Resources:
 
 # S3 bucket for lambda code
-  S3Bucket:
-    Type: 'AWS::S3::Bucket' 
-    DeletionPolicy: Delete
-    Properties:
-      BucketName: Code-Bucket
+# To auto make bucket name by system leave name out.
+# Reference name later with Ref! <logic name of bucket resource>
+#  S3Bucket:
+#    Type: 'AWS::S3::Bucket' 
+#    DeletionPolicy: Delete
     
-
-
- # DynamoDB: Primary key is "id" and tablename is "ToDoItems"
+ # WORKING - DynamoDB: Primary key is "id" and tablename is "ToDoItems"
  # TEST: yes it build in cloud formation 4-8-2025
-  DDBTable:
-    Type: AWS::DynamoDB::Table
-    Properties:
-      TableName: "ToDoItems"
-      AttributeDefinitions:
-        -
-          AttributeName: "id"
-          AttributeType: "S"
-      KeySchema: 
-        -
-          AttributeName: "id"
-          KeyType: "HASH"
-      ProvisionedThroughput:
-        ReadCapacityUnits: 5
-        WriteCapacityUnits: 2
+ # DDBTable:
+ #   Type: AWS::DynamoDB::Table
+ #   Properties:
+ #     TableName: "ToDoItems"
+ #     AttributeDefinitions:
+ #       -
+ #         AttributeName: "id"
+ #         AttributeType: "S"
+ #     KeySchema: 
+ #       -
+ #         AttributeName: "id"
+ #         KeyType: "HASH"
+ #     ProvisionedThroughput:
+ #       ReadCapacityUnits: 5
+ #       WriteCapacityUnits: 2
 
  # Lambda Execution role
  
- # Lambda Function: one function for "createItem, getItems, and deleteItem"
+ # FAILED - Lambda Function: one function for "createItem, getItems, and deleteItem"
   ItemLambdaFunction:
-    Type: AWS::Lambda::Function
-    Properties:
-      FunctionName: item-python-function
-      Handler: index.handler # index.py file with function named handler
-      #Role: !GetAtt LambdaExecutionRole.Arn # NEED TO CREATE THIS!!!
-      Code:
-        S3Bucket: code-bucket # need pre
-        #S3key: lambda-code.zip
-      Runtime: python3.10
-      Timeout: 10
-      MemorySize: 128
+  Type: AWS::Lambda::Function
+  Properties:
+    FunctionName: item-python-function
+    Handler: index.handler
+    Role: arn:aws:iam::533267198585:role/cfst-1449-56d6b82b5af86e591f4074e8065b41-LambdaRole-evjCXW5F1xMO
+    Code:
+      S3Bucket: ks3://kflddfdfdaadfd93459348578934
+      S3Key: index.zip
+    Runtime: python3.10
+    Timeout: 10
+    MemorySize: 128
 
  # APIGW: setup methods "POST /todos, GET /todos, DELETE /todo?id=some-id"
    # POST /items -> CreateItemFunction  
@@ -79,5 +77,17 @@ Resources:
 #
 # WORK LOG
 #
-# T 4/10: need to create a lambda role
-# W 4/09: create lambda function
+# F 4/11:
+# 
+
+# T 4/10: 
+# Create bucket and upload local script
+# To create a unique bucket name do not put any name in the bucket resource
+# this forces CFM to make a bucket name. Have the labmda refrenece the unique name
+# by way of !Ref my_bucket which is the logical identifier.
+# Uploading code to a lambda function - need to manually pre-stage file in S3 or
+# use a CLI generated method as detailed:
+# https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-cli-package.html
+
+# W 4/09: 
+# Create lambda function
