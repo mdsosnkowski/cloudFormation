@@ -1,4 +1,4 @@
-# Title: Simple To-Do List API
+# Title: Simple To-Do List API V1 Lambda inline test
 # Date: April 8 to April XX 2025
 # AI created Labt to learn Lambda, API Gateway, and DynamoDB.
 # AI chat link: https://chatgpt.com/c/67f336c5-9df4-800d-a890-280f0a75df66
@@ -61,10 +61,9 @@ Resources:
       Handler: index.handler
       Role: !GetAtt LambdaExecutionRole.Arn # use GetAtt which returns ARN, !Ref only the logical name
       Code:
-        ZipFile: 
-
-        # NEED TO PUT COMMANDS FOR ZIP FILED OF PYTHON CODE FROM PRE-EXISIGN S3 BUCKET
-
+        ZipFile: |
+          def handler(event, context):
+              return {"statusCode": 200, "body": "Hello from Lambda"}
       Runtime: python3.10
       Timeout: 10
       MemorySize: 128
@@ -91,15 +90,14 @@ Resources:
 # NOTE: You cannot create EC2 keys as part of the build.
 ###################################
 # WORK LOG
-# F 4/11
-# Stage python index.zip file in S3 bucket and reference S3 in Lambda.
 #
+
 # T 4/10:
 # Working are basic Lambda "hello world script" 
 # Note: need Create bucket and upload local script prior to stack build
 # Uploading code to a lambda function - need to manually pre-stage file in S3 or
 # use a CLI generated method as detailed:
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-cli-package.html
-#
+
 # W 4/09: 
 # Create lambda function
