@@ -61,9 +61,9 @@ Resources:
       Handler: index.handler
       Role: !GetAtt LambdaExecutionRole.Arn # use GetAtt which returns ARN, !Ref only the logical name
       Code:
+        # This is the pre-created bucket and manual uploaded python code file saved as a .zip
         ZipFile: 
 
-        # NEED TO PUT COMMANDS FOR ZIP FILED OF PYTHON CODE FROM PRE-EXISIGN S3 BUCKET
 
       Runtime: python3.10
       Timeout: 10
@@ -91,8 +91,9 @@ Resources:
 # NOTE: You cannot create EC2 keys as part of the build.
 ###################################
 # WORK LOG
-# F 4/11
-# Stage python index.zip file in S3 bucket and reference S3 in Lambda.
+# T 4/16
+# Prior to build create a python index.zip file in S3 bucket and reference S3 in Lambda.
+#
 #
 # T 4/10:
 # Working are basic Lambda "hello world script" 
@@ -103,3 +104,67 @@ Resources:
 #
 # W 4/09: 
 # Create lambda function
+
+
+## code for lambda function
+#import json
+#import uuid
+#import boto3
+#import os
+
+#dynamodb = boto3.resource('dynamodb')
+#table_name = os.environ['TABLE_NAME']
+#table = dynamodb.Table(table_name)
+
+#def handler(event, context):
+#    try:
+#        print("Received event:", json.dumps(event))#
+#
+#        # If triggered via API Gateway (proxy integration)
+#        body = event.get("body")
+#        if body:
+#            body = json.loads(body)  # parse stringified JSON
+#        else:
+#            body = event  # fallback for other trigger types
+
+        # Example expects "task": "Buy milk"
+#        task = body.get("task")
+#        if not task:
+#            return {
+#                "statusCode": 400,
+#                "body": json.dumps({"error": "Missing 'task' field"})
+#            }
+
+#        item = {
+#            "id": str(uuid.uuid4()),
+#            "task": task
+#        }
+
+#        table.put_item(Item=item)
+
+#        return {
+#            "statusCode": 200,
+#            "body": json.dumps({"message": "Task added", "item": item})
+#        }
+
+#    except Exception as e:
+#        print("Error:", str(e))
+#        return {
+#            "statusCode": 500,
+#            "body": json.dumps({"error": "Internal server error"})
+#        }
+
+#When you deploy this Lambda, set an environment variable:
+#environment: {
+#  TABLE_NAME: 'TodoTable'
+#}
+
+# Sample Event Payload (via API Gateway
+#{
+#  "task": "Finish CDK project"
+#}
+
+#r if going through HTTP via API Gateway, the raw event looks like this:
+#{
+#  "body": "{\"task\": \"Finish CDK project\"}"
+#}
