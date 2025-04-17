@@ -61,8 +61,13 @@ Resources:
       Handler: index.handler
       Role: !GetAtt LambdaExecutionRole.Arn # use GetAtt which returns ARN, !Ref only the logical name
       Code:
+        # zipfile means inline code will be made by CFN into a simple .zip file NOT the location of your code!
+        # ZipFile: <Inline code here>
+
         # This is the pre-created bucket and manual uploaded python code file saved as a .zip
-        ZipFile: 
+        S3Bucket: python-test9483598347953
+        # Need the name of the file which is the "KEY"
+        S3Key: index.zip
 
 
       Runtime: python3.10
@@ -91,9 +96,10 @@ Resources:
 # NOTE: You cannot create EC2 keys as part of the build.
 ###################################
 # WORK LOG
-# T 4/16
+# T 4/17
 # Prior to build create a python index.zip file in S3 bucket and reference S3 in Lambda.
-#
+# YESS, created a .zip file with python code and had it load from s3 automatically correctly
+# NEXT: Test lambda function.
 #
 # T 4/10:
 # Working are basic Lambda "hello world script" 
