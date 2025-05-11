@@ -6,13 +6,14 @@
 # API Gateway: Exposes the HTTP Endpoints
 # 
 ###########################################
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Simple Hello World Lambda Function.
+# Lambda Function is the default "hello world"
 
 
-# Lambda
 
 
-
-# Api Gateway
+# Api Gateway uses "curl" to get the response
 
 
 
