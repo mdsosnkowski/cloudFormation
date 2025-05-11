@@ -1,0 +1,59 @@
+# Title: Simple To-Do List API
+# Date: May 12 to May 16 2025
+# AI created Labt to learn Lambda, API Gateway interconnect
+# AI chat link: 
+# Lambda: Returns Hello World text to api gatway
+# API Gateway: Exposes the HTTP Endpoints
+# 
+###########################################
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Simple Hello World Lambda Function.
+# Lambda Function is the default "hello world"
+Resources:
+  HelloWorldLambdaRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: HelloWorldLambdaRole
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole  
+      
+
+
+
+# Api Gateway uses "curl" to get the response
+
+
+
+
+###########################################
+# WORK LOG
+###########################################
+# May 12
+# Built Lambda function and used default hellow world for retun.
+# Focus: understand how API gateway receives the return
+# Q: how does uses submitt the request?
+
+
+
+ #######################################################
+ # Validate stack template:
+# aws cloudformation validate-template --template-body file:///mnt/c/Users/Joasia/Documents/MikeStuff/CloudFormationProjects/cloudFormation/PR1_API_To_Lambda_HelloWorld.yaml
+#
+# Deploy stack
+# NOTE: When using the AWS CLI to create or update a stack that includes IAM resources, you must specify the capability using the --capabilities flag
+# aws cloudformation create-stack   --stack-name my-stack --template-body  file:///mnt/c/Users/Joasia/Documents/MikeStuff/CloudFormationProjects/cloudFormation/PR1_API_To_Lambda_HelloWorld.yaml --capabilities CAPABILITY_NAMED_IAM  
+#
+# Delete stack
+# aws cloudformation delete-stack   --stack-name my-stack
+#
+# NOTE: do not put the parameters in the cli command as theses are in the config
+# NOTE: try to use a non-hardcodded Instance type
+# NOTE: You cannot create EC2 keys as part of the build.
+###################################
