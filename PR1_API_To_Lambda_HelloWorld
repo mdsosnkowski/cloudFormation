@@ -1,0 +1,29 @@
+# Title: Simple To-Do List API
+# Date: May 12 to May 16 2025
+# AI created Labt to learn Lambda, API Gateway interconnect
+# AI chat link: 
+# Lambda: Returns default to api gatway
+# API Gateway: Exposes the HTTP Endpoints
+# 
+###########################################
+
+
+# Lambda
+
+
+
+# Api Gateway
+
+
+
+
+###########################################
+# WORK LOG
+###########################################
+# May 12
+# Built Lambda function and used default hellow world for retun.
+# Focus: understand how API gateway receives the return
+# Q: how does uses submitt the request?
+
+
+
