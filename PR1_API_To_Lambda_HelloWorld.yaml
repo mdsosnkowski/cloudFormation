@@ -8,7 +8,7 @@
 ###########################################
 AWSTemplateFormatVersion: '2010-09-09'
 Description: Simple Hello World Lambda Function.
-# Lambda Function is the default "hello world"
+# Lambda Function Role
 Resources:
   HelloWorldLambdaRole:
     Type: AWS::IAM::Role
@@ -23,9 +23,23 @@ Resources:
             Action: sts:AssumeRole
       ManagedPolicyArns:
         - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole  
-      
-
-
+# Lambda Function with inline script
+# NOTE the handler is identified by using the same name
+# as the code's function name.
+  HelloWorldFunction:
+    Type: AWS::Lambda::Function
+    Properties: 
+      FunctionName: HelloWorldFunction
+      Runtime: python3.12
+      Handler: index.lambda_handler
+      # Use !GetAtt to get the arn # the role defined above
+      Role: !GetAtt HelloWorldLambdaRole.Arn
+      Code:
+      # Used for small code, AWS will zip the code during the build.
+        ZipFile: |
+          def lambda_handler(event, context):
+             return "Hello, World"
+          
 
 # Api Gateway uses "curl" to get the response
 
@@ -35,11 +49,15 @@ Resources:
 ###########################################
 # WORK LOG
 ###########################################
-# May 12
+# May XX
 # Built Lambda function and used default hellow world for retun.
 # Focus: understand how API gateway receives the return
 # Q: how does uses submitt the request?
 
+# May 12
+# Created default role for lambda function
+# Reference role using !GetAtt by function
+# Tested and passed getting function "Hello World!"
 
 
  #######################################################
