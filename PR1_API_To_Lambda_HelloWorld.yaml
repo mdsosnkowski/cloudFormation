@@ -23,6 +23,7 @@ Resources:
             Action: sts:AssumeRole
       ManagedPolicyArns:
         - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole  
+
 # Lambda Function with inline script
 # NOTE the handler is identified by using the same name
 # as the code's function name.
@@ -39,7 +40,6 @@ Resources:
         ZipFile: |
           def lambda_handler(event, context):
              return "Hello, World"
-          
 
 # Api Gateway uses "curl" to get the response
 
@@ -49,7 +49,7 @@ Resources:
 ###########################################
 # WORK LOG
 ###########################################
-# May XX
+# May 14
 # Built Lambda function and used default hellow world for retun.
 # Focus: understand how API gateway receives the return
 # Q: how does uses submitt the request?
