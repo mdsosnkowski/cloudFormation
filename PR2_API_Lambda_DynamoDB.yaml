@@ -1,0 +1,73 @@
+# Title: Project 2 - API call to lambda to get one element from DynamoDB
+# Date: May 19 to May 23 2025
+# API Gateway: Exposes the HTTP Endpoints
+# https://<api-id>.execute-api.<region>.amazonaws.com/prod/hello
+###########################################
+
+Resources:
+
+# DynamoDB
+# Q How to make a dyndb with one record?
+# A Define a one element schema and populate it via API put or 
+# import data from a source such as S3 file.
+  MyDynamoDB:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: "One_Element_Table"
+      ProvisionedThroughput:
+      # Must have this to determine read/writes to db
+        ReadCapacityUnits: 3
+        WriteCapacityUnits: 1
+      KeySchema:
+      # Specifies the attributes that make up the primary key for the table. 
+      # The attributes in the KeySchema property must also be defined in the AttributeDefinitions property
+        -
+          AttributeName: "PartId"
+          KeyType: "HASH"
+      
+      AttributeDefinitions:
+      # Represents an attribute for describing the schema for the table and indexes
+      # What is the "S" mean? S = String, N = Number, and B = Binary
+        - 
+          AttributeName: "PartId"
+          AttributeType: "S"
+      
+      Tags:
+      # Tags use an array for th KeyPair
+        - Key: "Name"
+          Value: "one_element_db"
+
+# Lambda Function to get data
+
+
+
+
+# API Gateway to have user get data by way of Lambda
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+###########################################
+# WORK LOG
+###########################################
+
+# May 23 Friday
+
+# May 22 Thursday
+
+# May 21 Wednesday
+
+# May 20 Tuesday
+
+# May 19 Monday
+# Built working DynamoDb with one record holder
