@@ -1,166 +1,58 @@
-Skip to content
-You said:
-format this more professionally and keep the concepts: # Title: Simple To-Do List API
-### Date: May 12 to May 16 2025
-###  AI created Labt to learn Lambda, API Gateway interconnect
-###  AI chat link: 
-###  Lambda: Returns default to api gatway
-###  API Gateway: Exposes the HTTP Endpoints
-###  
-###########################################
 
+# METHOD: Question Design Development
 
-# Lambda Function
+### Use the format below to learn code and for long term memory.
+### ASK-DOCS-TRY-FAIL / AI HINT/ TEACH
 
+| Principle                 | Alignment with Method                               |
+| ------------------------- | --------------------------------------------------- |
+| **Active Recall**         | “TRY” and “TEACH” phases demand memory retrieval.   |
+| **Spaced Repetition**     | “REPEAT” encourages spaced and varied practice.     |
+| **Desirable Difficulty**  | “FAIL” creates productive struggle.                 |
+| **Interleaving**          | Each loop can target a new concept or variation.    |
+| **Generation Effect**     | “TRY” forces code creation from memory.             |
+| **Feedback & Correction** | “FAIL” + “AI HINT” give real-time corrective input. |
+| **Self-Explanation**      | “TEACH” phase activates deep processing.            |
 
 
-# Api Gateway
+### Phases: ASK → DOCS → TRY → FAIL → AI HINT/TEACH → REPEAT
+1. ASK (Formulate a Question)
 
+    What to do: Write a question or problem statement before reading any documentation.
 
+    Example: "How can I make an AWS Lambda function send an email using SES?"
 
+2. DOCS (Self-Guided Research)
 
-###########################################
-# WORK LOG
-###########################################
-# May 12
-# Built Lambda function and used default hellow world for retun.
-# Focus: understand how API gateway receives the return
-# Q: how does uses submitt the request?
+    What to do: Search the official documentation or trusted technical blogs for answers.
 
+    Goal: Find a concept, code snippet, or explanation that helps answer your question.
 
-ChatGPT said:
+3. TRY (Hands-On Practice)
 
-Here's a more professionally formatted version of your project documentation while preserving the core concepts:
-Project Title: Simple To-Do List API
+    What to do: Write code based on what you’ve read.
 
-Date: May 12 – May 16, 2025
-Purpose: AI-generated lab to gain hands-on experience with AWS Lambda and API Gateway integration.
+    Principle: Active recall + generation effect — you remember better by producing, not just reviewing.
 
-Overview:
-This project demonstrates a basic setup of a serverless API using AWS Lambda and API Gateway. The Lambda function serves as the backend logic, while API Gateway exposes HTTP endpoints to interact with the Lambda service.
+4. FAIL (Intentional Testing to Break It)
 
-AI Chat Link: (Insert link here if applicable)
-Architecture Components
+    What to do: Run your code. Expect failure. Look at the output. Debug.
 
-AWS Lambda
+    Why: Desirable difficulties and immediate feedback help form stronger memory pathways.
 
-    Purpose: Handles backend logic for the API.
+5. AI HINT / TEACH (Get Unstuck or Explain)
 
-    Current Implementation: Returns a default "Hello, World" response.
+    If stuck: Ask AI (like me) for a hint, not the full solution.
 
-Amazon API Gateway
+    If not stuck: Try to teach what you just learned, in plain English, to the AI.
 
-    Purpose: Provides HTTP endpoints to access Lambda functions.
+    Why: Teaching strengthens understanding (Feynman technique); small hints prevent frustration while keeping the learning effortful.
 
-    Role: Acts as the public-facing interface for client requests.
+6. REPEAT (Refine & Expand)
 
-Work Log
-May 12
+    What to do: Refactor your code, add comments, or expand the use case slightly.
 
-    Tasks Completed:
+    Example: After email works, add an attachment or error handling.
 
-        Created a basic AWS Lambda function using the default "Hello, World" template.
+    Why: Spaced repetition and incremental learning deepen long-term retention.
 
-        Connected the Lambda function to API Gateway.
-
-    Focus:
-
-        Understand how API Gateway receives and forwards Lambda function responses.
-
-    Outstanding Question:
-
-        How do users submit requests to the endpoint (e.g., through curl, Postman, or a frontend app)?
-
-Would you like this in Markdown, PDF, or added to a GitHub README file structure?
-You said:
-put in GitHub README
-ChatGPT said:
-
-Here’s the content formatted as a professional README.md file for GitHub:
-
-# Simple To-Do List API
-
-**Date:** May 12 – May 16, 2025  
-**Purpose:** AI-generated lab to learn and apply AWS Lambda and API Gateway integration.
-
-## Overview
-
-This project demonstrates a simple serverless architecture using AWS Lambda and Amazon API Gateway. The Lambda function serves as the backend processor, while API Gateway exposes HTTP endpoints to handle client requests. This foundational setup provides the groundwork for building a full-featured To-Do list API.
-
-**AI Chat Link:** _[Insert link here]_
-
----
-
-## Architecture Components
-
-### AWS Lambda
-- **Role:** Backend logic processor
-- **Status:** Returns a default "Hello, World" message
-- **Next Steps:** Replace placeholder logic with actual To-Do list operations (e.g., add, delete, list items)
-
-### Amazon API Gateway
-- **Role:** Public-facing HTTP endpoint provider
-- **Status:** Successfully integrated with the Lambda function
-- **Next Steps:** Define additional routes for full CRUD functionality
-
----
-
-## Work Log
-
-### May 12, 2025
-- **Tasks Completed:**
-  - Created Lambda function using default "Hello, World" template
-  - Integrated Lambda with API Gateway
-
-- **Focus:**  
-  - Understand how API Gateway receives and routes responses from Lambda
-
-- **Open Question:**  
-  - How do users submit requests to the endpoint? (e.g., via Postman, curl, or frontend app)
-
----
-
-## Future Improvements
-- Implement CRUD functionality for To-Do items
-- Add request validation via API Gateway models or Lambda logic
-- Enable CORS for frontend integration
-- Deploy using AWS CloudFormation or SAM
-
----
-
-## License
-This project is for educational purposes and is not licensed for production use.
-
-Let me know if you want me to generate this as a downloadable file or help with pushing it to your GitHub repo.
-
-
-ChatGPT can make mistakes. Check important info.
-
-
-## Inverted logic used in the project
-# Learning CloudFormation Faster with Inverse Logic
-
-Use inverse logic to uncover learning pitfalls and reinforce strong habits. Here are three mindset traps—and the truths that will help you learn AWS CloudFormation more effectively:
-
----
-
-### 1. ❌ “I don’t need to understand the resources I’m declaring.”
-
-- ✅ **Inverse Truth:** You must understand each AWS resource (like `AWS::EC2::Instance`, `AWS::IAM::Role`, etc.) to write effective CloudFormation templates.
-- 🧠 **Why it helps:** Treating CloudFormation as just YAML/JSON will limit you—understanding how the actual AWS services behave is critical.
-
----
-
-### 2. ❌ “Debugging CloudFormation errors isn’t worth my time—I’ll just try random fixes.”
-
-- ✅ **Inverse Truth:** You should treat every CloudFormation error as an opportunity to deeply understand the template and service behavior.
-- 🧠 **Why it helps:** CloudFormation errors are painful but precise—they often point to misunderstandings in IAM, dependencies, or resource properties.
-
----
-
-### 3. ❌ “I’ll learn CloudFormation by reading templates without building anything myself.”
-
-- ✅ **Inverse Truth:** Actively building, deploying, and modifying real CloudFormation stacks teaches far more than passive reading.
-- 🧠 **Why it helps:** Real feedback from the AWS environment (success, failure, drift, rollback) reinforces concepts faster than theory alone.
-
----
