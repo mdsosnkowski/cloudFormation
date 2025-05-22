@@ -37,12 +37,79 @@ Resources:
         - Key: "Name"
           Value: "one_element_db"
 
-# Lambda Function to get data
+  # FOR LAMBDA NEED: POLICY-EXCUTIONROLE-RESOURCE
+  
+  # Lambda execution role and inline policy
+  Lambda_Role:
+    Type: AWS::IAM::Role
+    Properties:
+      Path: /
+      RoleName: Lambda_Role
+      AssumeRolePolicyDocument:
+        # this inline policy is to allow lambda to assume access
+        Version: "2012-10-17"
+        Statement:
+        - Effect: Allow
+          Principal:
+            Service: lambda.amazonaws.com
+          Action: sts:AssumeRole
+      Policies:
+        # These are the actions that the role can do
+        - PolicyName: LambdaDynamodDB
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement: 
+              - Effect: Allow
+                Action:
+                    - dynamodb:PutItem
+                    - dynamodb:GetItem
+                Resource: !GetAtt MyDynamoDB.Arn 
+        
+
+
+  # Lambda function resource
+  Lambda_Function:
+    Type: AWS::Lambda::Function
+    Properties:
+      Runtime: python3.10
+      Role: arn:aws:iam::111222333:role/lambda-role
+      Handler: index.handler
+      Code:
+        ZipFile: |
+        cdjfdkfjdkfd
+        
 
 
 
 
-# API Gateway to have user get data by way of Lambda
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+
+  # API Gateway Resources
+  #HttpApi:
+   # Type: AWS::ApiGatewayV2::Api
+    #Properties:
+     # Name: Lambda Proxy
+      #Description: Lambda proxy using quick create
+      #ProtocolType: HTTP
+      #Target: arn:aws:apigateway:{region}:lambda:path/2015-03-31/functions/arn:aws:lambda:{region}:{account-id}:function:{function-name}/invocations
+
+  # API Gateway Lambda Integration 
+
+
+
 
 
 
@@ -59,15 +126,34 @@ Resources:
 
 ###########################################
 # WORK LOG
+# METHOD: ASK - DOCS - FAIL - AI HINT
 ###########################################
 
 # May 23 Friday
 
 # May 22 Thursday
-
-# May 21 Wednesday
-
-# May 20 Tuesday
+# Setup Lambda function for get and post to dynamodb
 
 # May 19 Monday
 # Built working DynamoDb with one record holder
+
+
+
+
+
+
+
+
+
+######################################
+# NOTES
+######################################
+
+# Failed rollout messgges
+# aws cloudformation describe-stack-events --stack-name my-stack
+
+# Stack Delete
+# aws cloudformation delete-stack   --stack-name my-stack
+
+# Rollout
+#aws cloudformation create-stack   --stack-name my-stack --template-body  file:///mnt/c/Users/Joasia/Documents/MikeStuff/CloudFormationProjects/cloudFormation/PR2_API_Lambda_DynamoDB.yaml
